@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 // Star Wars Characters (DATA)
 // =============================================================
-var reservation = [
+const reservation = [
   {
     routeName: "tables",
     name: "wait-fake02",
@@ -25,9 +25,9 @@ var reservation = [
   },
  ];
 
- var waitlist = [
+ const waitlist = [
   {
-    routeName: "waitlist",
+    routeName: "test1",
     name: "wait-fake01",
     phone: "8765432",
     email: "test@test.com",
@@ -74,16 +74,35 @@ app.get("/api/:reservation?", function(req, res) {
   return res.json(reservation);
 });
 
+app.get("/api/:waitlist?", function(req, res) {
+  var chosen = req.params.waitlist;
+
+  if (chosen) {
+    console.log(chosen);
+
+    for (var i = 0; i < waitlist.length; i++) {
+      if (chosen === waitlist[i].routeName) {
+        return res.json(waitlist[i]);
+        console.log(waitlist[i])
+      }
+    }
+    return res.json(false);
+  }
+  return res.json(waitlist);
+});
+
 // Create New Characters - takes in JSON input
 app.post("/api/new", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body-parser middleware
   var newReservation = req.body;
 
+  newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
+
   console.log(newReservation);
 
   // We then add the json the user sent to the character array
-  characters.push(newReservation);
+  reservation.push(newReservation);
 
   // We then display the JSON to the users
   res.json(newReservation);
