@@ -15,29 +15,25 @@ app.use(bodyParser.json());
 
 // Star Wars Characters (DATA)
 // =============================================================
-// var characters = [
-//   {
-//     routeName: "yoda",
-//     name: "Yoda",
-//     role: "Jedi Master",
-//     age: 900,
-//     forcePoints: 2000
-//   },
-//   {
-//     routeName: "darthmaul",
-//     name: "Darth Maul",
-//     role: "Sith Lord",
-//     age: 200,
-//     forcePoints: 1200
-//   },
-//   {
-//     routeName: "obiwankenobi",
-//     name: "Obi Wan Kenobi",
-//     role: "Jedi Master",
-//     age: 55,
-//     forcePoints: 1350
-//   }
-// ];
+var reservation = [
+  {
+    routeName: "tables",
+    name: "wait-fake02",
+    phone: "1234567",
+    email: "res@test.com",
+    id: 1234
+  },
+ ];
+
+ var waitlist = [
+  {
+    routeName: "tables",
+    name: "wait-fake01",
+    phone: "8765432",
+    email: "test@test.com",
+    id: 5678
+  },
+ ];
 
 // Routes
 // =============================================================
@@ -48,9 +44,17 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
+app.get("/tables", function(req, res) {
+  res.sendFile(path.join(__dirname, "tables.html"));
+});
+
+app.get("/reserve", function(req, res) {
+  res.sendFile(path.join(__dirname, "reserve.html"));
+});
+
 // Get all characters
 app.get("/all", function(req, res) {
-  res.json(characters);
+  res.json(reservation);
 });
 
 // Search for Specific Character (or all characters) - provides JSON
