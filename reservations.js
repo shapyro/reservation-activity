@@ -27,7 +27,7 @@ var reservation = [
 
  var waitlist = [
   {
-    routeName: "tables",
+    routeName: "waitlist",
     name: "wait-fake01",
     phone: "8765432",
     email: "test@test.com",
@@ -57,36 +57,36 @@ app.get("/all", function(req, res) {
   res.json(reservation);
 });
 
-// Search for Specific Character (or all characters) - provides JSON
-// app.get("/api/:characters?", function(req, res) {
-//   var chosen = req.params.characters;
+//Search for Specific Character (or all characters) - provides JSON
+app.get("/api/:reservation?", function(req, res) {
+  var chosen = req.params.reservation;
 
-//   if (chosen) {
-//     console.log(chosen);
+  if (chosen) {
+    console.log(chosen);
 
-//     for (var i = 0; i < characters.length; i++) {
-//       if (chosen === characters[i].routeName) {
-//         return res.json(characters[i]);
-//       }
-//     }
-//     return res.json(false);
-//   }
-//   return res.json(characters);
-// });
+    for (var i = 0; i < reservation.length; i++) {
+      if (chosen === reservation[i].routeName) {
+        return res.json(reservation[i]);
+      }
+    }
+    return res.json(false);
+  }
+  return res.json(reservation);
+});
 
 // Create New Characters - takes in JSON input
 app.post("/api/new", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body-parser middleware
-  var newcharacter = req.body;
+  var newReservation = req.body;
 
-  console.log(newcharacter);
+  console.log(newReservation);
 
   // We then add the json the user sent to the character array
-  characters.push(newcharacter);
+  characters.push(newReservation);
 
   // We then display the JSON to the users
-  res.json(newcharacter);
+  res.json(newReservation);
 });
 
 // Starts the server to begin listening
