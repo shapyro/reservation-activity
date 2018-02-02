@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 // Star Wars Characters (DATA)
 // =============================================================
-const reservation = [
+
   {
     routeName: "tables",
     name: "wait-fake02",
@@ -25,7 +25,7 @@ const reservation = [
   },
  ];
 
- const waitlist = [
+
   {
     routeName: "test1",
     name: "wait-fake01",
